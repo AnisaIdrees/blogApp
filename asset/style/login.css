@@ -15,10 +15,11 @@
   align-items: center;
   justify-content: center;
   /* background-color: #4070f4; */
-  background-image: url(https://img.freepik.com/premium-photo/workplace-with-gerbera-flower-computer-minimalistic-home-office-with-designer-background_230311-5353.jpg?ga=GA1.1.1244698165.1732776280&semt=ais_hybrid);
+  background-image: url(https://img.freepik.com/premium-photo/high-angle-view-coffee-cup-table_1048944-226919.jpg?w=826);
   background-repeat: no-repeat;
   column-gap: 30px;
   background-size: cover;
+  /* background-position: ; */
 }
 
 .form {
