@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <!-- Coding by CodingLab | www.codinglabweb.com-->
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Responsive Login and Signup Form </title>
+  <title>Login Form </title>
   <!-- CSS -->
   <link rel="stylesheet" href="../style/login.css">
   <!-- Boxicons CSS -->
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
   <section class="container forms">
     <div class="form login">
@@ -55,27 +57,29 @@
   </section>
 
   <script>
+
     const forms = document.querySelector(".forms"),
-  pwShowHide = document.querySelectorAll(".eye-icon"),
-  links = document.querySelectorAll(".link");
-// Add click event listener to each eye icon for toggling password visibility
-pwShowHide.forEach(eyeIcon => {
-  eyeIcon.addEventListener("click", () => {
-    let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
-    pwFields.forEach(password => {
-      if (password.type === "password") { // If password is hidden
-        password.type = "text"; // Show password
-        eyeIcon.classList.replace("bx-hide", "bx-show"); // Change icon to show state
-        return;
-      }
-      password.type = "password"; // Hide password
-      eyeIcon.classList.replace("bx-show", "bx-hide"); // Change icon to hide state
-    });
-  });
-});
+      pwShowHide = document.querySelectorAll(".eye-icon"),
+      links = document.querySelectorAll(".link");
+    // Add click event listener to each eye icon for toggling password visibility
+    pwShowHide.forEach(eyeIcon => {
+      eyeIcon.addEventListener("click", () => {
+        let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
+        pwFields.forEach(password => {
+          if (password.type === "password") { // If password is hidden
+            password.type = "text"; // Show password
+            eyeIcon.classList.replace("bx-hide", "bx-show"); // Change icon to show state
+            return;
+          }
+          password.type = "password"; // Hide password
+          eyeIcon.classList.replace("bx-show", "bx-hide"); // Change icon to hide state
+        });
+      });
+    });  
   </script>
   <!-- JavaScript -->
 
-  <script src="../javascript/index.js"type="module"></script>
+  <script src="../javascript/index.js" type="module"></script>
 </body>
+
 </html>

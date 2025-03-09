@@ -4,7 +4,10 @@ import {
     createUserWithEmailAndPassword,
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js'
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js'
+import {
+    getFirestore,
+
+} from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js'
 
 
 const firebaseConfig = {
@@ -14,15 +17,15 @@ const firebaseConfig = {
     storageBucket: "blog-app-6c9b4.firebasestorage.app",
     messagingSenderId: "602669397293",
     appId: "1:602669397293:web:66d408eca23866102c4fa4"
-  };
- 
-  
-  const app = initializeApp(firebaseConfig);
-  const auth= getAuth(app);
-  const db = getFirestore(app);
+};
 
 
- export{
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+export {
     auth,
     createUserWithEmailAndPassword,
- } 
+} 
