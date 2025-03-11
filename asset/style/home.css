@@ -161,7 +161,7 @@ nav .navbar .links li:hover .js-sub-menu{
   transform: rotate(45deg);
 }
 .search-box i{
-  font-size: 20px;
+  font-size: 30px;
 }
 .search-box .input-box input{
   position: absolute;
