@@ -160,6 +160,9 @@ nav .navbar .links li:hover .js-sub-menu{
   top: -6px;
   transform: rotate(45deg);
 }
+.search-box i{
+  font-size: 20px;
+}
 .search-box .input-box input{
   position: absolute;
   top: 50%;
