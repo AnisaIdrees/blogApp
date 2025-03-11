@@ -27,7 +27,7 @@ nav .navbar{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: auto;
+  /* margin: auto; */
   /* background: red; */
   padding: 0 50px;
 }
@@ -43,6 +43,9 @@ nav .navbar .nav-links{
 }
 nav .navbar .links{
   display: flex;
+  background-color: yellow;
+  width: 600px;
+  text-align: center;
 }
 nav .navbar .links li{
   position: relative;
