@@ -9,7 +9,7 @@
 }
 
 .container {
-  height: 100vh;
+  height: 110vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@ form {
 }
 
 .field input:focus {
-  border-bottom-width: 2px;
+  border: 1px solid #0088ff9d;
 }
 
 .eye-icon {
