@@ -9,7 +9,7 @@ import {
 
 } from './firebase.config.js';
 
-//---------------------create account / sign up ---------------------------------//
+//------------------------------------  create account / sign up   -------------------------------------//
 
 const register = async (ele) => {
     ele.preventDefault()
@@ -37,7 +37,7 @@ const register = async (ele) => {
             text: 'Passwords do not match!',
             confirmButtonText: "OK",
         });
-    }
+    };
 
     try {
         let userCredential = await createUserWithEmailAndPassword(
@@ -53,24 +53,20 @@ const register = async (ele) => {
             name,
             email,
             password,
-
-        })
-
+            date,
+        });
 
         // SweetAlert2 success popup
         await Swal.fire({
             icon: 'success',
             title: 'Signup Successful!',
-            text: 'Welcome to '+ name,
+            text: 'Welcome to ' + name,
             // timer: 2000,
             showConfirmButton: true,
             confirmButtonText: "OK",
         });
         window.location.href = '/index.html'
         console.log('user added to db');
-
-
-
 
     } catch (error) {
         console.log("Signup Error:", error.code, error.message);
@@ -83,3 +79,11 @@ const register = async (ele) => {
     }
 }
 document.getElementById('signUp-btn')?.addEventListener('click', register);
+
+
+
+
+
+
+
+//----------------------------------------- login code ---------------------------------------//
