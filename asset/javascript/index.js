@@ -19,7 +19,7 @@ const register = async (ele) => {
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('Confirm-password').value;
     let confirmForMesg = document.getElementById('messageText')
-    console.log(name,email, password, confirmPassword);
+    console.log(name, email, password, confirmPassword);
 
 
     if (password === confirmPassword) {
@@ -28,8 +28,15 @@ const register = async (ele) => {
 
     }
     else {
-        confirmForMesg.innerHTML = `password do not matched`;
+        confirmForMesg.innerHTML = `password does not matched`;
         confirmForMesg.style.color = "red"
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Passwords do not match!',
+            confirmButtonText: "OK",
+        });
     }
 
     try {
@@ -41,21 +48,37 @@ const register = async (ele) => {
         let user = userCredential.user;
         console.log(user.uid, user);
 
-   /// firestore save data
-await setDoc(doc(db , 'users',user.uid),{
-    name,
-    email,
-    password,
+        /// firestore save data
+        await setDoc(doc(db, 'users', user.uid), {
+            name,
+            email,
+            password,
 
-})
-window.location.href='/index.html'
-console.log('user added to db');
+        })
+
+
+        // SweetAlert2 success popup
+        await Swal.fire({
+            icon: 'success',
+            title: 'Signup Successful!',
+            text: 'Welcome to '+ name,
+            // timer: 2000,
+            showConfirmButton: true,
+            confirmButtonText: "OK",
+        });
+        window.location.href = '/index.html'
+        console.log('user added to db');
 
 
 
 
     } catch (error) {
-        console.log(error.message);
+        console.log("Signup Error:", error.code, error.message);
+        Swal.fire({
+            icon: 'error',
+            title: 'Signup Failed!',
+            text: error.message,
+        });
 
     }
 }
