@@ -6,9 +6,11 @@ import {
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js'
 import {
     getFirestore,
-    collection, 
+    collection,
     addDoc,
     setDoc,
+    doc,
+    
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js'
 
@@ -31,8 +33,9 @@ const db = getFirestore(app);
 export {
     auth,
     createUserWithEmailAndPassword,
-    collection, 
+    collection,
     addDoc,
     setDoc,
-
+    db,
+    doc,
 } 

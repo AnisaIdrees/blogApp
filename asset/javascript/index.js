@@ -5,6 +5,7 @@ import {
     doc,
     addDoc,
     setDoc,
+    db,
 
 } from './firebase.config.js';
 
@@ -18,7 +19,7 @@ const register = async (ele) => {
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('Confirm-password').value;
     let confirmForMesg = document.getElementById('messageText')
-    console.log(email, password, confirmPassword);
+    console.log(name,email, password, confirmPassword);
 
 
     if (password === confirmPassword) {
@@ -27,7 +28,7 @@ const register = async (ele) => {
 
     }
     else {
-        confirmForMesg.innerHTMl = `password do not matched`;
+        confirmForMesg.innerHTML = `password do not matched`;
         confirmForMesg.style.color = "red"
     }
 
@@ -40,14 +41,21 @@ const register = async (ele) => {
         let user = userCredential.user;
         console.log(user.uid, user);
 
-        // firestore save data
+   /// firestore save data
+await setDoc(doc(db , 'users',user.uid),{
+    name,
+    email,
+    password,
 
+})
+window.location.href='/index.html'
+console.log('user added to db');
 
 
 
 
     } catch (error) {
-        console.log(error, message);
+        console.log(error.message);
 
     }
 }
