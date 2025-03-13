@@ -89,6 +89,10 @@ document.getElementById('signUp-btn')?.addEventListener('click', register);
 //----------------------------------------- login code ---------------------------------------//
 const login = () => {
 
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+
+
     
 }
 
