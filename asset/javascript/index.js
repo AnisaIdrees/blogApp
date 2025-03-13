@@ -87,3 +87,9 @@ document.getElementById('signUp-btn')?.addEventListener('click', register);
 
 
 //----------------------------------------- login code ---------------------------------------//
+const login = () => {
+
+    
+}
+
+document.getElementById('loginBtn').addEventListener('click', login);
