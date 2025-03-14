@@ -1,9 +1,11 @@
 import {
     auth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword ,
+    signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
+    onAuthStateChanged,
+    signOut,
     collection,
     doc,
     addDoc,
@@ -89,13 +91,13 @@ document.getElementById('signUp-btn')?.addEventListener('click', register);
 
 
 //----------------------------------------- login code ---------------------------------------//
-const login = async(ele) => {
+const login = async (ele) => {
     ele.preventDefault();
 
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    console.log(password ,email);
-    
+    console.log(password, email);
+
 
     try {
         let loginUser = await signInWithEmailAndPassword(
@@ -104,8 +106,8 @@ const login = async(ele) => {
             password
         );
         const user = loginUser.user;
-        console.log( "current user login >>>> ",user);
-        
+        console.log("current user login >>>> ", user);
+
         Swal.fire({
             title: "✅Login Successful!",
             text: "Welcome to" + email,
@@ -114,11 +116,13 @@ const login = async(ele) => {
         });
 
 
+        window.location.href = '/index.html'
+
     } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode ,errorMessage);
-        
+        console.log(errorCode, errorMessage);
+
         Swal.fire({
             title: "❌ Login Failed!",
             text: error.message,
@@ -158,9 +162,41 @@ const signWithGoogle = async () => {
             confirmButtonText: "OK",
         });
 
+        window.location.href = '/index.html'
     } catch (error) {
         console.log(error.message);
     }
 };
 
 document.getElementById("sigInWithGoogle")?.addEventListener("click", signWithGoogle);
+
+
+
+
+// --------------------- sign out----------------------------------//
+document.getElementById("signOut")?.addEventListener("click", async () => {
+    try {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, Logout",
+            cancelButtonText: "Cancel"
+        });
+
+        if (result.isConfirmed) {
+            await signOut(auth);
+            Swal.fire("Logged Out!", "You have been logged out successfully.", "success");
+            console.log("Logout hogya!");
+        
+        }
+    } catch (error) {
+        Swal.fire("Error!", "Logout nahi hua. Please try again.", "error");
+        console.log("Logout nahiiiiii hua!", error);
+    }
+});
+
+//----------------------------------onAuthStateChange ----------------------------------//

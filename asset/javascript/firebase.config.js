@@ -4,7 +4,9 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword ,
     GoogleAuthProvider,
-    signInWithPopup,
+    signInWithPopup, 
+    onAuthStateChanged,
+    signOut,
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js'
 import {
@@ -39,6 +41,8 @@ export {
     signInWithEmailAndPassword ,
     GoogleAuthProvider,
     signInWithPopup,
+    onAuthStateChanged,
+    signOut,
     collection,
     addDoc,
     setDoc,
