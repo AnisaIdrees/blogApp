@@ -174,29 +174,154 @@ document.getElementById("sigInWithGoogle")?.addEventListener("click", signWithGo
 
 
 // --------------------- sign out----------------------------------//
-document.getElementById("signOut")?.addEventListener("click", async () => {
-    try {
-        const result = await Swal.fire({
-            title: "Are you sure?",
-            text: "You will be logged out!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, Logout",
-            cancelButtonText: "Cancel"
-        });
+// document.getElementById("signOut")?.addEventListener("click", async () => {
+//     try {
+//         const result = await Swal.fire({
+//             title: "Are you sure?",
+//             text: "You will be logged out!",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#d33",
+//             cancelButtonColor: "#3085d6",
+//             confirmButtonText: "Yes, Logout",
+//             cancelButtonText: "Cancel"
+//         });
 
-        if (result.isConfirmed) {
-            await signOut(auth);
-            Swal.fire("Logged Out!", "You have been logged out successfully.", "success");
-            console.log("Logout hogya!");
+//         if (result.isConfirmed) {
+//             await signOut(auth);
+//             Swal.fire("Logged Out!", "You have been logged out successfully.", "success");
+//             console.log("Logout hogya!");
         
-        }
-    } catch (error) {
-        Swal.fire("Error!", "Logout nahi hua. Please try again.", "error");
-        console.log("Logout nahiiiiii hua!", error);
-    }
-});
+//         }
+//     } catch (error) {
+//         Swal.fire("Error!", "Logout nahi hua. Please try again.", "error");
+//         console.log("Logout nahiiiiii hua!", error);
+//     }
+// });
 
 //----------------------------------onAuthStateChange ----------------------------------//
+// const navLinks = document.querySelector(".links");
+
+// onAuthStateChanged(auth, (user) => {
+//     let loginLink = document.querySelector(".login-link");
+
+//     if (user) {
+//         console.log("User is Logged In:", user.email);
+
+//         // ✅ "Login" button remove karo
+//         if (loginLink) {
+//             loginLink.remove();
+//         }
+
+//         // ✅ Agar pehle se logout button hai toh repeat mat karo
+//         if (!document.getElementById("logOut")) {
+//             let logOutLi = document.createElement("li");
+//             let logOutBtn = document.createElement("button");
+//             logOutBtn.id = "logOut";
+//             logOutBtn.innerText = "Logout";
+//             logOutBtn.classList.add("logOutBtn");
+//             logOutLi.appendChild(logOutBtn);
+//             navLinks.appendChild(logOutLi);
+//         }
+
+//     } else {
+//         console.log("No user logged in!");
+
+//         // ✅ Logout button remove karo agar user logout hai
+//         let logOutBtn = document.getElementById("logOut");
+//         if (logOutBtn) {
+//             logOutBtn.parentNode.remove();
+//         }
+
+//         // ✅ "Login" button wapas add karo
+//         if (!document.querySelector(".login-link")) {
+//             let loginLi = document.createElement("li");
+//             let loginA = document.createElement("a");
+//             loginA.href = "/asset/html/login.html";
+//             loginA.innerText = "Login";
+//             loginA.classList.add("login-link");
+//             loginLi.appendChild(loginA);
+//             navLinks.appendChild(loginLi);
+//         }
+//     }
+// });
+
+// // ✅ Event delegation: Logout button pe event listener lagane ka sahi tareeqa
+// navLinks?.addEventListener("click", async (event) => {
+//     if (event.target.id === "logOut") {
+//         console.log("Logout button clicked!");
+
+//         try {
+//             await signOut(auth);
+//             window.location.href = "/asset/html/login.html"; // Redirect to login page
+//         } catch (error) {
+//             console.error("Sign out error:", error);
+//         }
+//     }
+// });
+
+
+// import { auth, signOut, onAuthStateChanged } from "./firebase.config.js";
+
+// ✅ Ensure DOM elements are available
+document?.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelector(".links");
+
+    onAuthStateChanged(auth, (user) => {
+        let loginLink = document.querySelector(".login-link");
+        let logOutBtn = document.getElementById("logOut");
+
+        if (user) {
+            console.log("User is Logged In:", user.email);
+
+            // ✅ "Login" button remove karo
+            if (loginLink) {
+                loginLink.remove();
+            }
+
+            // ✅ Agar logout button pehle se exist nahi kar raha toh add karo
+            if (!logOutBtn) {
+                let logOutLi = document.createElement("li");
+                let logOutButton = document.createElement("button");
+                logOutButton.id = "logOut";
+                logOutButton.innerText = "Logout";
+                logOutButton.classList.add("logOutBtn");
+                logOutLi.appendChild(logOutButton);
+                navLinks.appendChild(logOutLi);
+            }
+
+        } else {
+            console.log("No user logged in!");
+
+            // ✅ Agar Logout button mojood hai, toh remove kar do
+            if (logOutBtn) {
+                logOutBtn.parentNode.remove();
+            }
+
+            // ✅ "Login" button wapas add karo agar pehle nahi hai
+            if (!document.querySelector(".login-link")) {
+                let loginLi = document.createElement("li");
+                let loginA = document.createElement("a");
+                loginA.href = "/asset/html/login.html";
+                loginA.innerText = "Login";
+                loginA.classList.add("login-link");
+                loginLi.appendChild(loginA);
+                navLinks.appendChild(loginLi);
+            }
+        }
+    });
+
+    // ✅ Event delegation: Logout button click pe event listener lagane ka sahi tareeqa
+    navLinks?.addEventListener("click", async (event) => {
+        if (event.target.id === "logOut") {
+            console.log("Logout button clicked!");
+
+            try {
+                await signOut(auth);
+                window.location.href = "/asset/html/login.html"; // Redirect to login page
+            } catch (error) {
+                console.error("Sign out error:", error);
+            }
+        }
+    });
+});
