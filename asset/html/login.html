@@ -20,10 +20,10 @@
         <header>Login</header>
         <form action="#">
           <div class="field input-field">
-            <input type="email" placeholder="Email" class="input">
+            <input type="email" placeholder="Email" class="input" id="email">
           </div>
           <div class="field input-field">
-            <input type="password" placeholder="Password" class="password">
+            <input type="password" placeholder="Password" class="password" id="password">
             <i class='bx bx-hide eye-icon'></i>
           </div>
           <div class="form-link">
@@ -40,7 +40,7 @@
       <div class="line"></div>
 
       <div class="media-options">
-        <a href="#" class="field google">
+        <a href="#" class="field google" id="sigInWithGoogle">
           <img src="/images/google_image-removebg-preview.png" alt="" class="google-img">
           <span>Login with Google</span>
         </a>
@@ -77,8 +77,10 @@
       });
     });  
   </script>
-  <!-- JavaScript -->
 
+  <!-- sweetalert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- JavaScript -->
   <script src="../javascript/index.js" type="module"></script>
 </body>
 

@@ -1,6 +1,9 @@
 import {
     auth,
     createUserWithEmailAndPassword,
+    signInWithEmailAndPassword ,
+    GoogleAuthProvider,
+    signInWithPopup,
     collection,
     doc,
     addDoc,
@@ -91,6 +94,8 @@ const login = async(ele) => {
 
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
+    console.log(password ,email);
+    
 
     try {
         let loginUser = await signInWithEmailAndPassword(
@@ -98,10 +103,64 @@ const login = async(ele) => {
             email,
             password
         );
-    } catch (error) {
+        const user = loginUser.user;
+        console.log( "current user login >>>> ",user);
+        
+        Swal.fire({
+            title: "✅Login Successful!",
+            text: "Welcome to" + email,
+            icon: "success",
+            confirmButtonText: "OK",
+        });
 
+
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode ,errorMessage);
+        
+        Swal.fire({
+            title: "❌ Login Failed!",
+            text: error.message,
+            icon: "error",
+            confirmButtonText: "Try Again",
+        });
     }
 
 }
-
 document.getElementById('loginBtn')?.addEventListener('click', login);
+
+
+
+
+
+
+
+
+////------------------------------------- login with  google----------------------------------------------////
+
+const provider = new GoogleAuthProvider();
+
+
+provider.setCustomParameters({ prompt: "select_account" });
+
+const signWithGoogle = async () => {
+
+    try {
+        const result = await signInWithPopup(auth, provider)
+        console.log("user google sy signIn hochuka hai.");
+        console.log(result.user);
+
+        Swal.fire({
+            title: "🎉 Google Sign-In Successful!",
+            text: "Welcome, " + result.user.displayName,
+            icon: "success",
+            confirmButtonText: "OK",
+        });
+
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+document.getElementById("sigInWithGoogle")?.addEventListener("click", signWithGoogle);

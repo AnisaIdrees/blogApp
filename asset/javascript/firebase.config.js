@@ -2,6 +2,9 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.4.0/firebas
 import {
     getAuth,
     createUserWithEmailAndPassword,
+    signInWithEmailAndPassword ,
+    GoogleAuthProvider,
+    signInWithPopup,
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js'
 import {
@@ -33,6 +36,9 @@ const db = getFirestore(app);
 export {
     auth,
     createUserWithEmailAndPassword,
+    signInWithEmailAndPassword ,
+    GoogleAuthProvider,
+    signInWithPopup,
     collection,
     addDoc,
     setDoc,
