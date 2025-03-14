@@ -53,7 +53,6 @@ const register = async (ele) => {
             name,
             email,
             password,
-            date,
         });
 
         // SweetAlert2 success popup
@@ -87,13 +86,22 @@ document.getElementById('signUp-btn')?.addEventListener('click', register);
 
 
 //----------------------------------------- login code ---------------------------------------//
-const login = () => {
+const login = async(ele) => {
+    ele.preventDefault();
 
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
 
+    try {
+        let loginUser = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+    } catch (error) {
 
-    
+    }
+
 }
 
-document.getElementById('loginBtn').addEventListener('click', login);
+document.getElementById('loginBtn')?.addEventListener('click', login);
