@@ -593,3 +593,13 @@ nav .navbar .links .ri-account-circle-2-line {
   height: 100vh;
   background-color:#F5F5F5 ;
 }
+.box{
+  width: 80%;
+  height: 40%;
+  background-color: #f8f668;
+  margin-top: 10px;
+  margin: 0 auto;
+}
+.text-center {
+  color: rgba(0, 0, 0, 0.808);
+}
