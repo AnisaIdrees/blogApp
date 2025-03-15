@@ -39,7 +39,7 @@ nav .navbar {
 
 .navbar .logo a {
   font-size: 30px;
-  color:#3E8DA8;
+  color: #3E8DA8;
   text-decoration: none;
   font-weight: 600;
 }
@@ -75,10 +75,11 @@ nav .navbar .links li a {
   font-size: 15px;
   font-weight: 500;
   transition: all .5s ease-in-out;
-  color:#3E8DA8;
+  color: #3E8DA8;
 
 }
-nav .navbar .links li a :hover{
+
+nav .navbar .links li a :hover {
   color: #db7556;
   /* transition: all .5s ease-in-out; */
 }
@@ -224,10 +225,12 @@ nav .navbar .links .ri-account-circle-2-line {
 .navbar .bx-menu {
   display: none;
 }
-.navbar .bx-menu{
+
+.navbar .bx-menu {
   color: #3E8DA8;
 }
-/* From Uiverse.io by andrew-demchenk0 */ 
+
+/* From Uiverse.io by andrew-demchenk0 */
 .switch {
   font-size: 17px;
   position: relative;
@@ -286,12 +289,13 @@ nav .navbar .links .ri-account-circle-2-line {
   height: 24px;
 }
 
-/* .switch:hover */.sun svg {
+/* .switch:hover */
+.sun svg {
   animation: rotate 15s linear infinite;
 }
 
 @keyframes rotate {
- 
+
   0% {
     transform: rotate(0);
   }
@@ -301,12 +305,13 @@ nav .navbar .links .ri-account-circle-2-line {
   }
 }
 
-/* .switch:hover */.moon svg {
+/* .switch:hover */
+.moon svg {
   animation: tilt 5s linear infinite;
 }
 
 @keyframes tilt {
- 
+
   0% {
     transform: rotate(0deg);
   }
@@ -324,17 +329,18 @@ nav .navbar .links .ri-account-circle-2-line {
   }
 }
 
-.input:checked + .slider {
+.input:checked+.slider {
   background-color: #183153;
 }
 
-.input:focus + .slider {
+.input:focus+.slider {
   box-shadow: 0 0 1px #183153;
 }
 
-.input:checked + .slider:before {
+.input:checked+.slider:before {
   transform: translateX(30px);
 }
+
 @media (max-width:920px) {
   nav .navbar {
     max-width: 100%;
@@ -356,9 +362,7 @@ nav .navbar .links .ri-account-circle-2-line {
 }
 
 @media (max-width:800px) {
-  nav {
-    /* position: relative; */
-  }
+
 
   .navbar .bx-menu {
     display: block;
@@ -409,9 +413,11 @@ nav .navbar .links .ri-account-circle-2-line {
   nav .navbar .links li {
     display: block;
   }
-  nav .navbar .links li a{
+
+  nav .navbar .links li a {
     color: white;
   }
+
   nav .navbar .links li .sub-menu {
     position: relative;
     top: 0;
@@ -479,5 +485,103 @@ nav .navbar .links .ri-account-circle-2-line {
 @media (max-width:370px) {
   nav .navbar .nav-links {
     max-width: 100%;
+  }
+}
+
+
+@media (max-width: 1400px) {
+  .container-xxl {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* //////////////////hero section */
+/* 🌟 Hero Section Styling */
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  background-image: url('https://c0.wallpaperflare.com/preview/764/181/181/flowers-interior-room-home.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+/* ✅ Black Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Black Effect */
+}
+
+/* 🌟 Content Styling */
+.hero-content {
+  position: relative;
+  max-width: 600px;
+  padding: 20px;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 2.7rem;
+  margin-bottom: 25px;
+  font-weight: 900;
+}
+
+.hero-content h2 {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 15px;
+  color: #3E8DA8; /* Theme Color */
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+/* 🔥 Button Styling */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  color: white;
+  background-color: #3E8DA8; /* Theme Color */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #2c6f89;
+}
+
+/* ✅ Responsive Styling */
+@media (max-width: 768px) {
+  .hero-content h1 {
+      font-size: 2rem;
+  }
+
+  .hero-content h2 {
+      font-size: 1.5rem;
+  }
+
+  .hero-content p {
+      font-size: 1rem;
+  }
+
+  .btn {
+      font-size: 0.9rem;
+      padding: 10px 20px;
   }
 }
