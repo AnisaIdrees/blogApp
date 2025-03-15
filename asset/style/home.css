@@ -758,6 +758,7 @@ nav .navbar .links .ri-account-circle-2-line {
   background-color: #F5F5F5;
 }
 .blog-container {
+  padding-top: 60px;
   display: flex;
   width: 100%;
   max-width: 1200px;
@@ -768,7 +769,7 @@ nav .navbar .links .ri-account-circle-2-line {
   border-radius: 8px;
   /* padding: 20px; */
   margin-right: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px #00000007;
   background:#ffffff34;
 }
 .blog-search {
@@ -788,24 +789,34 @@ nav .navbar .links .ri-account-circle-2-line {
   padding: 8px;
   font-size: 16px;
 }
+.blog-search:focus{
+  border: 1px solid #007399;
+}
 .blog-search i {
   font-size: 20px;
   color: #777;
   margin-left: 10px;
+  background-color: #007399;
+  padding: 10px 14px;
+  border-radius: 2px;
+  color: white;
+}
+.p-3 ,.recent-heading{
+
+
+  font-weight: 600;
 }
 .blog-post-card {
   padding: 15px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   margin-bottom: 15px;
   background: #ffffff34;
-  border-radius: 8px;
   width: 100%; 
 }
 .blog-post-card img {
   width: 100%;
   height: 350px;
   object-fit: cover;
-  border-radius: 5px;
 }
 .category-tag {
   color: #007399;
@@ -849,7 +860,7 @@ nav .navbar .links .ri-account-circle-2-line {
   height: 50px;
   margin-bottom: 10px;
   object-fit: cover;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 .recent-post-card h3 {
   font-size: 16px;
@@ -881,4 +892,3 @@ nav .navbar .links .ri-account-circle-2-line {
     font-size: 18px;
   }
 }
-</style>
