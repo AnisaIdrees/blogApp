@@ -35,21 +35,21 @@ jsArrow.onclick = function() {
  navLinks.classList.toggle("show3");
 }
 
-// seraching filter
-function filterPosts() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let posts = document.getElementsByClassName("blog-post-card");
+// // seraching filter
+// function filterPosts() {
+//     let input = document.getElementById("searchInput").value.toLowerCase();
+//     let posts = document.getElementsByClassName("blog-post-card");
     
-    for (let i = 0; i < posts.length; i++) {
-        let title = posts[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
-        let content = posts[i].getElementsByTagName("p")[0].innerText.toLowerCase();
+//     for (let i = 0; i < posts.length; i++) {
+//         let title = posts[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+//         let content = posts[i].getElementsByTagName("p")[0].innerText.toLowerCase();
         
-        if (title.includes(input) || content.includes(input)) {
-            posts[i].style.display = "block";
-        } else {
-            posts[i].style.display = "none";
+//         if (title.includes(input) || content.includes(input)) {
+//             posts[i].style.display = "block";
+//         } else {
+//             posts[i].style.display = "none";
 
             
-        }
-    }
-}
+//         }
+//     }
+// }
