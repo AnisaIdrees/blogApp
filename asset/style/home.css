@@ -585,3 +585,11 @@ nav .navbar .links .ri-account-circle-2-line {
       padding: 10px 20px;
   }
 }
+
+
+/* ////////////////////////category section /////////////////////////////*/
+.category{
+  width: 100%;
+  height: 100vh;
+  background-color:#F5F5F5 ;
+}
