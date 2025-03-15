@@ -163,6 +163,8 @@ const signWithGoogle = async () => {
         });
 
         window.location.href = '/index.html'
+        console.log('useer login he');
+        
     } catch (error) {
         console.log(error.message);
     }
@@ -173,86 +175,8 @@ document.getElementById("sigInWithGoogle")?.addEventListener("click", signWithGo
 
 
 
-// --------------------- sign out----------------------------------//
-// document.getElementById("signOut")?.addEventListener("click", async () => {
-//     try {
-//         const result = await Swal.fire({
-//             title: "Are you sure?",
-//             text: "You will be logged out!",
-//             icon: "warning",
-//             showCancelButton: true,
-//             confirmButtonColor: "#d33",
-//             cancelButtonColor: "#3085d6",
-//             confirmButtonText: "Yes, Logout",
-//             cancelButtonText: "Cancel"
-//         });
 
-//         if (result.isConfirmed) {
-//             await signOut(auth);
-//             Swal.fire("Logged Out!", "You have been logged out successfully.", "success");
-//             console.log("Logout hogya!");
-        
-//         }
-//     } catch (error) {
-//         Swal.fire("Error!", "Logout nahi hua. Please try again.", "error");
-//         console.log("Logout nahiiiiii hua!", error);
-//     }
-// });
-
-//----------------------------------onAuthStateChange ----------------------------------//
-
-// // ✅ Navbar ke `<a>` tags ko select karo
-// const writeLink = document.querySelector(".write-link"); // "Write" button
-// const loginLink = document.querySelector(".login-link"); // "Login" button
-
-// // ✅ Firebase Authentication Check karo
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         // 🎯 User Logged in hai:
-//         writeLink.style.display = "block"; // ✅ Write Button Show karo
-//         loginLink.textContent = "Logout"; // 🔄 Login Button ko Logout me Change karo
-//         loginLink.href = "#"; // Prevent Default Action
-
-//         // 🚀 Logout Click Event
-//         loginLink?.addEventListener("click", (e) => {
-//             e.preventDefault();
-//             signOut(auth).then(() => {
-//                 window.location.reload(); // ✅ Logout hone ke baad page reload
-//             }).catch((error) => {
-//                 console.error("Logout Error:", error);
-//             });
-//         });
-
-//     } else {
-//         // 🚫 User Logged Out hai:
-//         writeLink.style.display = "none"; // ❌ Write Button Hide karo
-//         loginLink.textContent = "Login"; // ✅ Show Login Button
-//         loginLink.href = "./asset/html/login.html"; // Login Page ka Link
-//     }
-// });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const writeLink = document.querySelector(".write-link");
-//     const loginLink = document.querySelector(".login-link");
-
-//     console.log("Write Link:", writeLink);
-//     console.log("Login Link:", loginLink);
-
-//     if (!writeLink) {
-//         console.error("❌ Error: Write Link not found!");
-//     }
-//     if (!loginLink) {
-//         console.error("❌ Error: Login Link not found!");
-//     }
-// });
-
-
-// import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-// import { app } from "./firebase.config.js"; // Firebase config import
-
-// const auth = getAuth(app);
-
-// ✅ Ensure DOM is Loaded Before Running Script
+//  Ensure DOM is Loaded Before Running Script
 document.addEventListener("DOMContentLoaded", () => {
     const writeLink = document.getElementById("write-link");  // Write Button
     const loginLink = document.getElementById("login-link");  // Login/Logout Button
@@ -263,34 +187,83 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // ✅ Firebase Authentication Check
+    // Firebase Authentication Check
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            console.log("✅ User logged in:", user);
+            console.log(" User logged in:", user);
             writeLink.style.display = "block"; // Show Write Button
             loginLink.textContent = "Logout"; // Change Login to Logout
             loginLink.href = "#"; // Prevent Default Action
+            console.log(user ,'user login he ');
+            
 
             loginLink.removeEventListener("click", handleLogout); // Avoid Multiple Listeners
             loginLink.addEventListener("click", handleLogout);
         } else {
-            console.log("🚫 No user logged in.");
+            console.log("No user logged in.");
             writeLink.style.display = "none"; // Hide Write Button
             loginLink.textContent = "Login"; // Show Login
             loginLink.href = "./asset/html/login.html"; // Redirect to Login Page
         }
     });
 
-    // ✅ Logout Function
-    async function handleLogout(e) {
-        e.preventDefault();
-        try {
+    // // Logout Function
+    // async function handleLogout(e) {
+    //     e.preventDefault();
+    //     try {
+    //         await signOut(auth);
+    //         console.log("User logged out!");
+    //         window.location.href = "./index.html"; // Reload to update UI
+    //     } catch (logoutError) {
+    //         console.error("Logout Error:", logoutError);
+    //         alert("Logout failed! Please try again.");
+    //     }
+
+
+    // }
+
+    // ✅ Logout Function with SweetAlert
+async function handleLogout(e) {
+    e.preventDefault();
+    try {
+        // Logout Confirmation Alert
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, logout!"
+        });
+
+        if (result.isConfirmed) {
             await signOut(auth);
             console.log("✅ User logged out!");
+
+            // 🎉 Success Message
+            await Swal.fire({
+                title: "Logged Out!",
+                text: "You have been successfully logged out.",
+                icon: "success",
+                timer: 2000,
+                showConfirmButton: false
+            });
+
             window.location.href = "./index.html"; // Reload to update UI
-        } catch (logoutError) {
-            console.error("❌ Logout Error:", logoutError);
-            alert("Logout failed! Please try again.");
         }
+
+    } catch (logoutError) {
+        console.error("❌ Logout Error:", logoutError);
+        
+        //  Error Alert
+        Swal.fire({
+            title: "Error!",
+            text: "Logout failed! Please try again.",
+            icon: "error",
+            confirmButtonColor: "#d33"
+        });
     }
+}
+
 });
