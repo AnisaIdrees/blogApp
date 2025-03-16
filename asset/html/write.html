@@ -31,7 +31,6 @@
 </head>
 <body>
     <div class="container">
-        <h1>heelloooooooooooooooooooooooooooo</h1>
         <h2 class="mb-4">Add New Blog</h2>
         <form id="blogForm">
             <div class="mb-3">
@@ -58,15 +57,16 @@
             <div class="mb-3">
                 <label class="form-label">Upload Image</label>
                 <input type="file" id="imageUpload" class="form-control">
-                <img id="imagePreview" class="image-preview">
+                <img id="imgPreview" class="image-preview">
             </div>
-            <button type="submit" class="btn btn-primary">Publish Blog</button>
+            <button type="submit" class="btn btn-primary"style="background-color:#007399;">Publish Blog</button>
         </form>
-        <button>anisa</button>
     </div>
+<!-- Add SweetAlert2 Library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="./asset/javascript/blog.js" type="module"></script>
-    <script src="./asset/javascript/firebase.config.js" type="module"></script>
+    <script src="/asset/javascript/blog.js" type="module"></script>
+    <script src="/asset/javascript/firebase.config.js"type="module" ></script>
     
 </body>
 </html>
