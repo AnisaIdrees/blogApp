@@ -39,7 +39,7 @@ nav .navbar {
 
 .navbar .logo a {
   font-size: 30px;
-  color: #3E8DA8;
+  color: #015e7d;
   text-decoration: none;
   font-weight: 600;
 }
@@ -75,7 +75,7 @@ nav .navbar .links li a {
   font-size: 15px;
   font-weight: 500;
   transition: all .5s ease-in-out;
-  color: #3E8DA8;
+  color:#015e7d;
 
 }
 
@@ -227,7 +227,7 @@ nav .navbar .links .ri-account-circle-2-line {
 }
 
 .navbar .bx-menu {
-  color: #3E8DA8;
+  color: #015e7d;
 }
 
 /* From Uiverse.io by andrew-demchenk0 */
@@ -376,7 +376,7 @@ nav .navbar .links .ri-account-circle-2-line {
     display: block;
     max-width: 270px;
     width: 100%;
-    background: #3E8DA8;
+    background:#015e7d;
     line-height: 40px;
     padding: 20px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -450,12 +450,7 @@ nav .navbar .links .ri-account-circle-2-line {
     display: none;
   }
 
-  .navbar .links li .sub-menu .more span {
-    /* background: red; */
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-  }
+
 
   .links li .sub-menu .more:hover .more-sub-menu {
     display: none;
@@ -558,7 +553,7 @@ nav .navbar .links .ri-account-circle-2-line {
   padding: 12px 24px;
   font-size: 1rem;
   color: white;
-  background-color: #3E8DA8;
+  background-color: #015e7d;
   /* Theme Color */
   text-decoration: none;
   border-radius: 5px;
@@ -637,113 +632,7 @@ nav .navbar .links .ri-account-circle-2-line {
   background-color: rebeccapurple;
   margin-right: 10px;
 }
-
-/* .blog-section {
-  margin-top: 20%;
-  width: 100%;
-  background-color: #F5F5F5;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.blog-container {
-  display: flex;
-  width: 100%;
-  max-width: 1200px;
-}
-
-.blog-recent-posts {
-  width: 30%;
-  border-radius: 4px;
-  padding: 20px;
-}
-
-.recent-post-card {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-}
-
-.recent-post-card img {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-  object-fit: cover;
-}
-
-.recent-post-card h3 {
-  font-size: 16px;
-  margin: 0;
-  color: #333;
-}
-
-.blog-post-list {
-  width: 80%;
-  border-radius: 8px;
-  padding: 20px;
-  margin-left: 20px;
-}
-
-.blog-search {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  background: #fff;
-}
-
-.blog-search input {
-  border: none;
-  outline: none;
-  flex: 1;
-  padding: 5px;
-  font-size: 16px;
-}
-
-.blog-search i {
-  font-size: 20px;
-  color: #777;
-}
-
-.blog-post-card {
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
-}
-
-.blog-post-card img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-}
-
-.pagination {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.pagination button {
-  padding: 10px 15px;
-  border: none;
-  background: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pagination button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-} */
-
+/* ////////////////////////blog section /////////////////////////// */
 .blog-dabba{
   width: 100%;
   height: 100%;
