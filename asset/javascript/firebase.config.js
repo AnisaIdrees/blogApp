@@ -16,6 +16,8 @@ import {
     addDoc,
     setDoc,
     doc,
+    onSnapshot,
+    getDocs
     
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js'
@@ -46,8 +48,10 @@ export {
     signOut,
     collection,
     serverTimestamp,
+    onSnapshot,
     addDoc,
     setDoc,
     db,
     doc,
+    getDocs
 } 
