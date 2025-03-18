@@ -103,23 +103,22 @@ window.location.pathname='/index.html'
 
 //////////////////// fetch data / display 
 
-
-
+// // 🔹 **Fetch Blogs & Pagination**
 // let currentPage = 1;
 // const postsPerPage = 3;
-// let blogsData = []; // Sare blogs store honge
+// let blogsData = [];
 
-// // 🔹 **Firestore se blogs fetch karna**
 // async function fetchBlogs() {
 //     try {
 //         const querySnapshot = await getDocs(collection(db, "blogs"));
 //         blogsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-//         displayBlogs(); // Blogs ko show karne ka function call karo
+//         displayBlogs();
 //     } catch (error) {
 //         console.error("Error fetching blogs:", error);
 //     }
+// }
 
-// // 🔹 **Blogs ko Page-wise Show Karna**
+// // 🔹 **Display Blogs**
 // function displayBlogs(filteredBlogs = null) {
 //     const blogContainer = document.querySelector(".blog-post-list");
 //     blogContainer.innerHTML = `
@@ -130,7 +129,7 @@ window.location.pathname='/index.html'
 //         </div>
 //     `;
 
-//     let blogsToShow = filteredBlogs || blogsData; // Agar search use ho to filteredBlogs show honge
+//     let blogsToShow = filteredBlogs || blogsData;
 //     let start = (currentPage - 1) * postsPerPage;
 //     let end = start + postsPerPage;
 //     let paginatedBlogs = blogsToShow.slice(start, end);
@@ -155,7 +154,7 @@ window.location.pathname='/index.html'
 //         blogContainer.appendChild(blogCard);
 //     });
 
-//     // Pagination buttons add karna
+//     // Pagination Buttons
 //     blogContainer.innerHTML += `
 //         <div class="pagination">
 //             <button id="prevBtn" style="background-color:#007399;" onclick="prevPage()">Previous</button>
@@ -181,18 +180,19 @@ window.location.pathname='/index.html'
 //         displayBlogs();
 //     }
 // }
-
+// document.getElementById("nextBtn")?.addEventListener("click", nextPage);
 // function prevPage() {
 //     if (currentPage > 1) {
 //         currentPage--;
 //         displayBlogs();
 //     }
 // }
+// document.getElementById("prevBtn")?.addEventListener("click", prevPage);
 
-// // 🔹 **Timestamp ko Date me Convert Karna**
+// // 🔹 **Format Date**
 // function formatDate(timestamp) {
 //     if (!timestamp) return "No Date";
-//     const date = new Date(timestamp.seconds * 1000); // Firebase timestamp ko JS date me convert karna
+//     const date = new Date(timestamp.seconds * 1000);
 //     return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
 // }
 
@@ -210,45 +210,28 @@ window.location.pathname='/index.html'
 //     currentPage = 1; // Jab search ho to first page pe le aao
 //     displayBlogs(filteredBlogs);
 // }
-// }
-// // ✅ **Function Call**
+
+// // ✅ **Initialize Fetch**
 // fetchBlogs();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 🔹 **Fetch Blogs & Pagination**
-let currentPage = 1;
-const postsPerPage = 3;
-let blogsData = [];
-
-async function fetchBlogs() {
-    try {
-        const querySnapshot = await getDocs(collection(db, "blogs"));
-        blogsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+// 🔹 **Next & Previous Page Functions**
+function nextPage() {
+    if (currentPage * postsPerPage < blogsData.length) {
+        currentPage++;
         displayBlogs();
-    } catch (error) {
-        console.error("Error fetching blogs:", error);
+    }
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        displayBlogs();
     }
 }
 
 // 🔹 **Display Blogs**
+async function fetchBlogs() {
 function displayBlogs(filteredBlogs = null) {
     const blogContainer = document.querySelector(".blog-post-list");
     blogContainer.innerHTML = `
@@ -284,62 +267,26 @@ function displayBlogs(filteredBlogs = null) {
         blogContainer.appendChild(blogCard);
     });
 
-    // Pagination Buttons
-    blogContainer.innerHTML += `
-        <div class="pagination">
-            <button id="prevBtn" style="background-color:#007399;" onclick="prevPage()">Previous</button>
-            <button id="nextBtn" style="background-color:#007399;" onclick="nextPage()">Next</button>
-        </div>
-    `;
+    // 🔹 **Pagination Buttons**
+    const paginationContainer = document.createElement("div");
+    paginationContainer.classList.add("pagination");
 
-    updatePaginationButtons(blogsToShow);
+    const prevButton = document.createElement("button");
+    prevButton.innerText = "Previous";
+    prevButton.style.backgroundColor = "#007399";
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener("click", prevPage);
+
+    const nextButton = document.createElement("button");
+    nextButton.innerText = "Next";
+    nextButton.style.backgroundColor = "#007399";
+    nextButton.disabled = currentPage * postsPerPage >= blogsToShow.length;
+    nextButton.addEventListener("click", nextPage);
+
+    paginationContainer.appendChild(prevButton);
+    paginationContainer.appendChild(nextButton);
+    blogContainer.appendChild(paginationContainer);
 }
-
-// 🔹 **Pagination Controls**
-function updatePaginationButtons(filteredBlogs = null) {
-    let totalBlogs = filteredBlogs ? filteredBlogs.length : blogsData.length;
-
-    document.getElementById("prevBtn").disabled = currentPage === 1;
-    document.getElementById("nextBtn").disabled = currentPage * postsPerPage >= totalBlogs;
 }
-
-// 🔹 **Next & Previous Page Functions**
-function nextPage() {
-    if (currentPage * postsPerPage < blogsData.length) {
-        currentPage++;
-        displayBlogs();
-    }
-}
-document.getElementById("nextBtn")?.addEventListener("click", nextPage);
-function prevPage() {
-    if (currentPage > 1) {
-        currentPage--;
-        displayBlogs();
-    }
-}
-document.getElementById("prevBtn")?.addEventListener("click", prevPage);
-
-// 🔹 **Format Date**
-function formatDate(timestamp) {
-    if (!timestamp) return "No Date";
-    const date = new Date(timestamp.seconds * 1000);
-    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-}
-
-// 🔹 **Search Blogs**
-function filterPosts() {
-    let searchQuery = document.getElementById("searchInput").value.toLowerCase();
-
-    let filteredBlogs = blogsData.filter(blog =>
-        blog.title.toLowerCase().includes(searchQuery) || 
-        blog.category.toLowerCase().includes(searchQuery) ||
-        blog.content.toLowerCase().includes(searchQuery) ||
-        blog.author.toLowerCase().includes(searchQuery)
-    );
-
-    currentPage = 1; // Jab search ho to first page pe le aao
-    displayBlogs(filteredBlogs);
-}
-
 // ✅ **Initialize Fetch**
 fetchBlogs();
