@@ -50,6 +50,7 @@ document.getElementById("blogForm")?.addEventListener("submit", async function(e
     const title = document.getElementById("title").value.trim();
     const category = document.getElementById("category").value.trim();
     const content = document.getElementById("content").value.trim();
+    const date = document.getElementById("date").value.trim();
     const user = auth.currentUser;
 
     if (!user) {
@@ -76,7 +77,7 @@ document.getElementById("blogForm")?.addEventListener("submit", async function(e
             imageUrl,
             userId: user.uid,
             author: user.displayName || "Anonymous",
-            date: firebase.firestore.FieldValue.serverTimestamp()
+            date
         });
         Swal.fire({
             icon: "success",
@@ -102,10 +103,10 @@ window.location.pathname='/index.html'
 
 
 //////////////////// fetch data / display 
-function formatDate(date) {
-        if (!date) return "No Date";
-        const dateVar = timestamp.toDate();
-        return `${dateVar.getDate()}-${dateVar.getMonth() + 1}-${dateVar.getFullYear()}`;
+function formatDate(timestamp) {
+        if (!timestamp) return "No Date";
+        const date = timestamp.toDate();
+        return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
      }
 // 🔹 **Fetch Blogs & Pagination**
 let currentPage = 1;
@@ -151,7 +152,7 @@ function displayBlogs(filteredBlogs = null) {
             <p class="category-tag p3 pt-3">| ${blogData.category || 'Uncategorized'}</p>
             <h3>${blogData.title || 'Untitled'}</h3>
             <p style="color: #0000009d;">${blogData.content.slice(0, 100)}...</p>
-            <p style="color: #000000dc;">${blogData.author || 'Unknown'} | ${formatDate(blogData.dateVar)}</p>
+            <p style="color: #000000dc;">${blogData.author || 'Unknown'} | <span id="date">${formatDate(blogData.date)}</span></p>
             <button style="padding: 8px; outline: none; border: 1.5px solid #007399; color: #007399; background-color: transparent; border-radius: 5px;">Read More</button>
         `;
 
