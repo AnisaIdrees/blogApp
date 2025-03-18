@@ -76,7 +76,7 @@ document.getElementById("blogForm")?.addEventListener("submit", async function(e
             imageUrl,
             userId: user.uid,
             author: user.displayName || "Anonymous",
-            date: serverTimestamp() 
+            date: firebase.firestore.FieldValue.serverTimestamp()
         });
         Swal.fire({
             icon: "success",
@@ -102,7 +102,11 @@ window.location.pathname='/index.html'
 
 
 //////////////////// fetch data / display 
-
+function formatDate(date) {
+        if (!date) return "No Date";
+        const dateVar = timestamp.toDate();
+        return `${dateVar.getDate()}-${dateVar.getMonth() + 1}-${dateVar.getFullYear()}`;
+     }
 // 🔹 **Fetch Blogs & Pagination**
 let currentPage = 1;
 const postsPerPage = 3;
@@ -147,7 +151,7 @@ function displayBlogs(filteredBlogs = null) {
             <p class="category-tag p3 pt-3">| ${blogData.category || 'Uncategorized'}</p>
             <h3>${blogData.title || 'Untitled'}</h3>
             <p style="color: #0000009d;">${blogData.content.slice(0, 100)}...</p>
-            <p style="color: #000000dc;">${blogData.author || 'Unknown'} | ${formatDate(blogData.date)}</p>
+            <p style="color: #000000dc;">${blogData.author || 'Unknown'} | ${formatDate(blogData.dateVar)}</p>
             <button style="padding: 8px; outline: none; border: 1.5px solid #007399; color: #007399; background-color: transparent; border-radius: 5px;">Read More</button>
         `;
 
@@ -190,12 +194,12 @@ function prevPage() {
 }
 // document.getElementById("prevBtn")?.addEventListener("click", prevPage);
 
-// 🔹 **Format Date**
-function formatDate(timestamp) {
-    if (!timestamp) return "No Date";
-    const date = new Date(timestamp.seconds * 1000);
-    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-}
+// // 🔹 **Format Date**
+// function formatDate(timestamp) {
+//     if (!timestamp) return "No Date";
+//     const date = new Date(timestamp.seconds * 1000);
+//     return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+// }
 
 // 🔹 **Search Blogs**
 function filterPosts() {
