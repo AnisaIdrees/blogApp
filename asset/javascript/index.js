@@ -207,20 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // // Logout Function
-    // async function handleLogout(e) {
-    //     e.preventDefault();
-    //     try {
-    //         await signOut(auth);
-    //         console.log("User logged out!");
-    //         window.location.href = "./index.html"; // Reload to update UI
-    //     } catch (logoutError) {
-    //         console.error("Logout Error:", logoutError);
-    //         alert("Logout failed! Please try again.");
-    //     }
 
-
-    // }
 
     // ✅ Logout Function with SweetAlert
 async function handleLogout(e) {
