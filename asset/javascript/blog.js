@@ -215,29 +215,147 @@ window.location.pathname='/index.html'
 // fetchBlogs();
 
 
-// 🔹 **Next & Previous Page Functions**
-function nextPage() {
-    if (currentPage * postsPerPage < blogsData.length) {
-        currentPage++;
-        displayBlogs();
-    }
-}
+// // 🔹 **Next & Previous Page Functions**
+// function nextPage() {
+//     if (currentPage * postsPerPage < blogsData.length) {
+//         currentPage++;
+//         displayBlogs();
+//     }
+// }
 
-function prevPage() {
-    if (currentPage > 1) {
-        currentPage--;
+// function prevPage() {
+//     if (currentPage > 1) {
+//         currentPage--;
+//         displayBlogs();
+//     }
+// }
+
+// // 🔹 **Display Blogs**
+// async function fetchBlogs() {
+// function displayBlogs(filteredBlogs = null) {
+//     const blogContainer = document.querySelector(".blog-post-list");
+//     blogContainer.innerHTML = `
+//         <h2 class="p-3" style="color: #000000dc;">Blog Posts</h2>
+//         <div class="blog-search">
+//             <input type="text" id="searchInput" placeholder="Search by title, author, category, content..." onkeyup="filterPosts()">
+//             <i class="ri-search-line"></i>
+//         </div>
+//     `;
+
+//     let blogsToShow = filteredBlogs || blogsData;
+//     let start = (currentPage - 1) * postsPerPage;
+//     let end = start + postsPerPage;
+//     let paginatedBlogs = blogsToShow.slice(start, end);
+
+//     paginatedBlogs.forEach(blogData => {
+//         const blogCard = document.createElement("div");
+//         blogCard.classList.add("blog-post-card");
+//         blogCard.setAttribute("data-title", blogData.title || "Untitled");
+//         blogCard.setAttribute("data-author", blogData.author || "Unknown");
+//         blogCard.setAttribute("data-category", blogData.category || "Uncategorized");
+//         blogCard.setAttribute("data-content", blogData.content || "");
+
+//         blogCard.innerHTML = `
+//             <img src="${blogData.imageUrl || 'default-image.jpg'}" alt="Blog Post Image">
+//             <p class="category-tag p3 pt-3">| ${blogData.category || 'Uncategorized'}</p>
+//             <h3>${blogData.title || 'Untitled'}</h3>
+//             <p style="color: #0000009d;">${blogData.content.slice(0, 100)}...</p>
+//             <p style="color: #000000dc;">${blogData.author || 'Unknown'} | ${formatDate(blogData.date)}</p>
+//             <button style="padding: 8px; outline: none; border: 1.5px solid #007399; color: #007399; background-color: transparent; border-radius: 5px;">Read More</button>
+//         `;
+
+//         blogContainer.appendChild(blogCard);
+//     });
+
+//     // 🔹 **Pagination Buttons**
+//     const paginationContainer = document.createElement("div");
+//     paginationContainer.classList.add("pagination");
+
+//     const prevButton = document.createElement("button");
+//     prevButton.innerText = "Previous";
+//     prevButton.style.backgroundColor = "#007399";
+//     prevButton.disabled = currentPage === 1;
+//     prevButton.addEventListener("click", prevPage);
+
+//     const nextButton = document.createElement("button");
+//     nextButton.innerText = "Next";
+//     nextButton.style.backgroundColor = "#007399";
+//     nextButton.disabled = currentPage * postsPerPage >= blogsToShow.length;
+//     nextButton.addEventListener("click", nextPage);
+
+//     paginationContainer.appendChild(prevButton);
+//     paginationContainer.appendChild(nextButton);
+//     blogContainer.appendChild(paginationContainer);
+// }
+// }
+// // ✅ **Initialize Fetch**
+// fetchBlogs();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 🔹 **Fetch Blogs & Pagination**
+let currentPage = 1;
+const postsPerPage = 3;
+let blogsData = [];
+
+// 🔹 **Fetch Blogs**
+async function fetchBlogs() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "blogs"));
+        blogsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         displayBlogs();
+    } catch (error) {
+        console.error("Blogs hasil karte waqt error aaya:", error);
     }
 }
 
 // 🔹 **Display Blogs**
-async function fetchBlogs() {
 function displayBlogs(filteredBlogs = null) {
     const blogContainer = document.querySelector(".blog-post-list");
     blogContainer.innerHTML = `
         <h2 class="p-3" style="color: #000000dc;">Blog Posts</h2>
         <div class="blog-search">
-            <input type="text" id="searchInput" placeholder="Search by title, author, category, content..." onkeyup="filterPosts()">
+            <input type="text" id="searchInput" placeholder="Title, author, category ya content ke zariye talash karein..." onkeyup="filterPosts()">
             <i class="ri-search-line"></i>
         </div>
     `;
@@ -287,6 +405,43 @@ function displayBlogs(filteredBlogs = null) {
     paginationContainer.appendChild(nextButton);
     blogContainer.appendChild(paginationContainer);
 }
+
+// 🔹 **Next & Previous Page Functions**
+function nextPage() {
+    if (currentPage * postsPerPage < blogsData.length) {
+        currentPage++;
+        displayBlogs();
+    }
 }
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        displayBlogs();
+    }
+}
+
+// 🔹 **Format Date**
+function formatDate(timestamp) {
+    if (!timestamp) return "No Date";
+    const date = new Date(timestamp.seconds * 1000);
+    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+}
+
+// 🔹 **Search Blogs**
+function filterPosts() {
+    let searchQuery = document.getElementById("searchInput").value.toLowerCase();
+
+    let filteredBlogs = blogsData.filter(blog =>
+        blog.title.toLowerCase().includes(searchQuery) || 
+        blog.category.toLowerCase().includes(searchQuery) ||
+        blog.content.toLowerCase().includes(searchQuery) ||
+        blog.author.toLowerCase().includes(searchQuery)
+    );
+
+    currentPage = 1; // Jab search ho to first page pe le aao
+    displayBlogs(filteredBlogs);
+}
+
 // ✅ **Initialize Fetch**
 fetchBlogs();
