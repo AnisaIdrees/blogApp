@@ -148,21 +148,21 @@
 
       </div>
       <script>
-        function filterPosts() {
-          let input = document.getElementById("searchInput").value.toLowerCase();
-          let posts = document.querySelectorAll(".blog-post-card");
-          posts.forEach(post => {
-            let title = post.getAttribute("data-title").toLowerCase();
-            let author = post.getAttribute("data-author").toLowerCase();
-            let category = post.getAttribute("data-category").toLowerCase();
-            let content = post.getAttribute("data-content").toLowerCase();
-            if (title.includes(input) || author.includes(input) || category.includes(input) || content.includes(input)) {
-              post.style.display = "block";
-            } else {
-              post.style.display = "none";
-            }
-          });
-        }
+        // function filterPosts() {
+        //   let input = document.getElementById("searchInput").value.toLowerCase();
+        //   let posts = document.querySelectorAll(".blog-post-card");
+        //   posts.forEach(post => {
+        //     let title = post.getAttribute("data-title").toLowerCase();
+        //     let author = post.getAttribute("data-author").toLowerCase();
+        //     let category = post.getAttribute("data-category").toLowerCase();
+        //     let content = post.getAttribute("data-content").toLowerCase();
+        //     if (title.includes(input) || author.includes(input) || category.includes(input) || content.includes(input)) {
+        //       post.style.display = "block";
+        //     } else {
+        //       post.style.display = "none";
+        //     }
+        //   });
+        // }
       </script>
 
 

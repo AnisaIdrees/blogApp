@@ -330,6 +330,16 @@ document.getElementById("blogForm")?.addEventListener("submit", async function (
     }
 });
 
+
+
+
+
+
+
+
+
+
+
 // Fetch & Display Blogs with Pagination and Search
 let currentPage = 1;
 const postsPerPage = 3;
@@ -339,6 +349,12 @@ async function fetchBlogs() {
     try {
         const querySnapshot = await getDocs(collection(db, "blogs"));
         blogsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        if (!blogsData.length) {
+            console.warn("No blogs found!");
+            return;
+        }
+
         console.log("Fetched Blogs:", blogsData); // Debugging ke liye
         displayBlogs();
 
@@ -357,82 +373,7 @@ function formatDate(timestamp) {
     return `${day}-${month}-${year}`; // Always use `-` instead of `/`
 }
 
-// function displayBlogs(filteredBlogs = null) {
-//     const blogContainer = document.querySelector(".blog-post-list");
-//     blogContainer.innerHTML = `
-//         <h2 class="p-3" style="color: #000000dc;">Blog Posts</h2>
-//         <div class="blog-search">
-//             <input type="text" id="searchInput" placeholder="Search by title, author, category, content..." onclick="filterPosts()">
-//             <i class="ri-search-line"></i>
-//         </div>
-//     `;
 
-//     let blogsToShow = filteredBlogs || blogsData;
-//     let start = (currentPage - 1) * postsPerPage;
-//     let end = start + postsPerPage;
-//     let paginatedBlogs = blogsToShow.slice(start, end);
-
-//     paginatedBlogs.forEach(blogData => {
-//         const blogCard = document.createElement("div");
-//         blogCard.classList.add("blog-post-card");
-
-//         blogCard.innerHTML = `
-//             <img src="${blogData.imageUrl || 'default-image.jpg'}" alt="Blog Post Image">
-//             <p class="category-tag p3 pt-3">| ${blogData.category || 'Uncategorized'}</p>
-//             <h3>${blogData.title || 'Untitled'}</h3>
-//             <p style="color: #0000009d;">${blogData.content.slice(0, 100)}...</p>
-//              ${blogData.author || 'Unknown'} |          ${blogData.date ? formatDate(blogData.date) : 'No Date'}
-//   </p>
-//             <button>Read More</button>
-//         `;
-//         blogContainer.appendChild(blogCard);
-//     });
-
-//     blogContainer.innerHTML += `
-//         <div class="pagination">
-//             <button id="prevBtn" style="background-color:#007399;">Previous</button>
-//             <button id="nextBtn" style="background-color:#007399;">Next</button>
-//         </div>
-//     `;
-//     document.getElementById("prevBtn").addEventListener("click", () => prevPage(blogsToShow));
-//     document.getElementById("nextBtn").addEventListener("click", () => nextPage(blogsToShow));
-//     updatePaginationButtons(blogsToShow);
-// }
-
-// function prevPage(blogs) {
-//     if (currentPage > 1) {
-//         currentPage--;
-//         displayBlogs(blogs);
-//     }
-// }
-
-// function nextPage(blogs) {
-//     if (currentPage * postsPerPage < blogs.length) {
-//         currentPage++;
-//         displayBlogs(blogs);
-//     }
-// }
-
-// function updatePaginationButtons(blogs) {
-//     document.getElementById("prevBtn").disabled = currentPage === 1;
-//     document.getElementById("nextBtn").disabled = currentPage * postsPerPage >= blogs.length;
-// }
-
-// function filterPosts() {
-//     let searchQuery = document?.getElementById("searchInput")?.value?.toLowerCase() || "";
-    
-//     let filteredBlogs = blogsData.filter(blog =>
-//         (blog.title?.toLowerCase?.() || "").includes(searchQuery) ||
-//         (blog.category?.toLowerCase?.() || "").includes(searchQuery) ||
-//         (blog.content?.toLowerCase?.() || "").includes(searchQuery) ||
-//         (blog.author?.toLowerCase?.() || "").includes(searchQuery)
-//     );
-
-//     currentPage = 1;
-//     displayBlogs(filteredBlogs.length > 0 ? filteredBlogs : blogsData);
-// }
-
-// fetchBlogs();
 
 console.log(blogsData);
 
@@ -441,7 +382,7 @@ function displayBlogs(filteredBlogs = null) {
     blogContainer.innerHTML = `
         <h2 class="p-3" style="color: #000000dc;">Blog Posts</h2>
         <div class="blog-search">
-            <input type="text" id="searchInput" placeholder="Search by title, author, category, content..." onkeyup="filterPosts()">
+            <input type="text" id="searchInput" placeholder="Search by title, author, category, content..." keyup="filterPosts()">
             <i class="ri-search-line"></i>
         </div>
     `;
@@ -461,7 +402,7 @@ function displayBlogs(filteredBlogs = null) {
             <h3>${blogData.title || 'Untitled'}</h3>
             <p style="color: #0000009d;">${blogData.content.slice(0, 100)}...</p>
             <p>${blogData.author || 'Unknown'} | ${blogData.date ? formatDate(blogData.date) : 'No Date'}</p>
-            <button>Read More</button>
+           <button  style="padding: 8px; outline: none; border: 1.5px solid #007399; color: #007399; background-color: transparent; border-radius: 5px;" class="read-more" data-id="${blogData.id}">Read More</button>
         `;
         blogContainer.appendChild(blogCard);
     });
@@ -495,22 +436,24 @@ function updatePaginationButtons(blogs) {
     document.getElementById("prevBtn").disabled = currentPage === 1;
     document.getElementById("nextBtn").disabled = currentPage * postsPerPage >= blogs.length;
 }
+
 function filterPosts() {
     if (!blogsData || !Array.isArray(blogsData)) {
         console.error("blogsData is not available yet.");
         return;
     }
 
-    let searchInput = document.getElementById("searchInput");
+    let searchInput = document?.getElementById("searchInput");
     if (!searchInput) return;
 
     let searchQuery = searchInput.value.toLowerCase().trim();
 
+
     let filteredBlogs = blogsData.filter(blog => {
-        let title = blog.title ? blog.title.toLowerCase() : "";
-        let category = blog.category ? blog.category.toLowerCase() : "";
-        let content = blog.content ? blog.content.toLowerCase() : "";
-        let author = blog.author ? blog.author.toLowerCase() : "";
+        let title = blog?.title?.toLowerCase() || "";
+        let category = blog?.category?.toLowerCase() || "";
+        let content = blog?.content?.toLowerCase() || "";
+        let author = blog?.author?.toLowerCase() || "";
 
         return (
             title.includes(searchQuery) ||
@@ -521,7 +464,7 @@ function filterPosts() {
     });
 
     currentPage = 1;
-    displayBlogs(filteredBlogs.length > 0 ? filteredBlogs : blogsData);
+    displayBlogs(filteredBlogs);
 }
 fetchBlogs()
 
@@ -536,9 +479,10 @@ fetchBlogs()
 
 
 
+
 async function fetchRecentPosts() {
     try {
-        const recentPostsQuery = query(collection(db, "blogs"), orderBy("date", "desc"), limit(7)); 
+        const recentPostsQuery = query(collection(db, "blogs"), orderBy("date", "desc"), limit(7));
         const querySnapshot = await getDocs(recentPostsQuery);
 
         let recentPostsData = querySnapshot.docs.map(doc => ({
@@ -554,13 +498,12 @@ async function fetchRecentPosts() {
 }
 
 function displayRecentPosts(recentPosts) {
-    const recentContainer = document.querySelector(".blog-recent-posts"); // ✅ Corrected selector
+    const recentContainer = document.querySelector(".blog-recent-posts");
     if (!recentContainer) {
         console.error("Recent posts container not found.");
         return;
     }
 
-    // ✅ Clear previous posts before adding new ones
     recentContainer.innerHTML = `<h2 class="recent-heading" style="color: #000000dc;">Recent Posts</h2>`;
 
     if (recentPosts.length === 0) {
@@ -582,5 +525,4 @@ function displayRecentPosts(recentPosts) {
     });
 }
 
-// ✅ Call fetchRecentPosts() when the page loads
 fetchRecentPosts();
