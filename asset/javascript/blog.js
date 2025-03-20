@@ -235,7 +235,7 @@ import {
     serverTimestamp,
     collection,
     onSnapshot,
-    getDocs
+    getDocs, query, orderBy, limit
 } from './firebase.config.js'
 
 const uploadImage = async () => {
@@ -524,3 +524,63 @@ function filterPosts() {
     displayBlogs(filteredBlogs.length > 0 ? filteredBlogs : blogsData);
 }
 fetchBlogs()
+
+
+
+
+
+
+
+
+
+
+
+
+async function fetchRecentPosts() {
+    try {
+        const recentPostsQuery = query(collection(db, "blogs"), orderBy("date", "desc"), limit(7)); 
+        const querySnapshot = await getDocs(recentPostsQuery);
+
+        let recentPostsData = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
+        console.log("Recent Posts:", recentPostsData); // Debugging ke liye
+        displayRecentPosts(recentPostsData);
+    } catch (error) {
+        console.error("Error fetching recent posts:", error);
+    }
+}
+
+function displayRecentPosts(recentPosts) {
+    const recentContainer = document.querySelector(".blog-recent-posts"); // ✅ Corrected selector
+    if (!recentContainer) {
+        console.error("Recent posts container not found.");
+        return;
+    }
+
+    // ✅ Clear previous posts before adding new ones
+    recentContainer.innerHTML = `<h2 class="recent-heading" style="color: #000000dc;">Recent Posts</h2>`;
+
+    if (recentPosts.length === 0) {
+        recentContainer.innerHTML += "<p>No recent posts available.</p>";
+        return;
+    }
+
+    recentPosts.forEach(post => {
+        const postElement = document.createElement("div");
+        postElement.classList.add("recent-post-card");
+
+        postElement.innerHTML = `
+            <img src="${post.imageUrl || 'default-image.jpg'}" alt="Recent Post Image">
+            <h3>${post.title || "Untitled"}</h3>
+            <p>${post.author || "Unknown"} | ${post.date ? formatDate(post.date) : "No Date"}</p>
+        `;
+
+        recentContainer.appendChild(postElement);
+    });
+}
+
+// ✅ Call fetchRecentPosts() when the page loads
+fetchRecentPosts();

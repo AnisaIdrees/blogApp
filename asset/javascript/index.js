@@ -5,6 +5,7 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     onAuthStateChanged,
+    sendPasswordResetEmail,
     signOut,
     collection,
     doc,
@@ -254,3 +255,24 @@ async function handleLogout(e) {
 }
 
 });
+
+
+// forgot password
+const forgotPasword = (e) => {
+    e.preventDefault()
+    let email = document.getElementById('email').value
+    if (!email) {
+      alert('Enter Valid Email')
+    }
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert('Password reset email sent Sucsessfully');
+  
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  }
+  document.getElementById('forgotPasword')?.addEventListener('click', forgotPasword)

@@ -2,10 +2,11 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.4.0/firebas
 import {
     getAuth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword ,
+    signInWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithPopup, 
+    signInWithPopup,
     onAuthStateChanged,
+    sendPasswordResetEmail,
     signOut,
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js'
@@ -17,8 +18,8 @@ import {
     setDoc,
     doc,
     onSnapshot,
-    getDocs
-    
+    getDocs,
+    query, orderBy, limit
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js'
 
@@ -41,9 +42,10 @@ const db = getFirestore(app);
 export {
     auth,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword ,
+    signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
+    sendPasswordResetEmail,
     onAuthStateChanged,
     signOut,
     collection,
@@ -53,5 +55,5 @@ export {
     setDoc,
     db,
     doc,
-    getDocs
+    getDocs, query, orderBy, limit
 } 

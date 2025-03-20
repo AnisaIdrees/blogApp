@@ -736,6 +736,7 @@ nav .navbar .links .ri-account-circle-2-line {
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   background: #ffffff34;
+  height: 100vh;
 }
 .recent-post-card {
   display: flex;
