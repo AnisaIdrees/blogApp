@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<body>
+<style>
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+</style>
+    <h1>All Blogs</h1>
+    <div id="blogs-container"></div>
+
+    <!-- View Detail Modal -->
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-content"></p>
+            <button onclick="openEditModal()">Edit</button>
+            <button onclick="deleteBlog()">Delete</button>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Blog</h2>
+            <input type="text" id="edit-title">
+            <textarea id="edit-content"></textarea>
+            <button onclick="updateBlog()">Update</button>
+        </div>
+    </div>
+
+    <script src="../javascript/firebase.config.js"type="module"></script>
+    <script src="../javascript/detail.js"type="module"></script>
+
+</body>
+</html>

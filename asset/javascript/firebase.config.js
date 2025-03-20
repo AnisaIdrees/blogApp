@@ -19,7 +19,8 @@ import {
     doc,
     onSnapshot,
     getDocs,
-    query, orderBy, limit
+    query, orderBy, limit,
+    updateDoc, deleteDoc 
 
 } from 'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js'
 
@@ -55,5 +56,5 @@ export {
     setDoc,
     db,
     doc,
-    getDocs, query, orderBy, limit
+    getDocs, query, orderBy, limit,updateDoc, deleteDoc 
 } 
